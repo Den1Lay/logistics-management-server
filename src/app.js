@@ -20,7 +20,7 @@ app
   .use(logger('dev'))
   .use(express.json())
   .use(express.urlencoded({extended: true}))
-  .get('*',express.static(path.resolve(__dirname, '..', '..', 'logistic-management', 'build')))
+  .get('*',express.static(path.resolve(__dirname, '..', '..', 'logistics-management', 'build')))
   .use('/', indexRouter)
   .use('/public', express.static(path.resolve(__dirname, '..', 'public')))
 
