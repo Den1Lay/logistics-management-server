@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+// точка запуска приложения
 
 /**
  * Module dependencies.
@@ -33,6 +33,7 @@ var server = http.createServer(app);
    server.on('error', onError);
    server.on('listening', onListening);
    
+   // используется при разработке для того что бы прибивать сервер.
    const io = socketServer(server);
    io.on('connection', socket => {
      socket.on('npmStop', () => {

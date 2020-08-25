@@ -1,9 +1,9 @@
+// стандартный роутер, который читает и записывает данные.
+
 import express from 'express';
 import {readFile, writeFile} from '../utils'
 
 var router = express.Router();
-
-/* GET home page. */
 
 router
   .get('/data', (req, res) => {

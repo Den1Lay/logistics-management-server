@@ -1,3 +1,5 @@
+// функция проверяет файл на факт его существования.
+
 import fs from 'fs'
 import path from 'path'
 
@@ -9,7 +11,6 @@ export default function (fileName) {
         resolve(false);
         return false
       }
-      //console.log('FILE_EXIST:', fileName[fileName.length-1]);
       resolve(true);
       return true
     })

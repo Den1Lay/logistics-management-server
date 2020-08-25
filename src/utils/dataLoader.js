@@ -1,10 +1,13 @@
+// Блок кода отвечающий за рабочие файлы.
+// Проверяет существование файлов. Если не находит делает запрос на диск, скачивает и сохраняет
+// После получения файлов запускает функцию с сервером, а так же функцию, которая будет обновлять 
+// Данные на диске через продолжительный период.
+
 import {writeFileSync} from 'fs'
 import {resolve} from 'path'
 
 import {writeFile, fileChecker, readFile} from '../utils'
-import { blueBright, greenBright, redBright } from 'chalk'
 import axios from 'axios'
-import {v4} from 'uuid'
 
 export default (launchServer) => {
   const yandexDiskHeaders = { Authorization: process.env.DISK_TOKEN || '' };
