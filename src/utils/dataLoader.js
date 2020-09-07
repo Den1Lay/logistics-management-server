@@ -35,21 +35,26 @@ export default (launchServer) => {
     }
     setTimeout(updater, 60000*60*12);
   };
+  
+  const pdfArr = ['about.pdf', 'test.pdf'];
+  for(let i of pdfArr) {
+    fileChecker(['public', i]).then(exist => {
+      if(!exist) {
+        axios.get('https://cloud-api.yandex.net/v1/disk/resources?path=disk%3A%2F'+i, 
+        {headers: yandexDiskHeaders})
+          .then(({data: {name, file}}) => {
+            axios.get(file, {headers: yandexDiskHeaders, responseType: 'arraybuffer'})
+              .then(({data}) => {
+                const res = Buffer.from(data, 'binary')
+                //writeFile([__dirname, '..', '..', 'public', name], res)
+                writeFileSync(resolve(__dirname, '..', '..', 'public', name), res, 'binary')
+              })
+          })
+      }
+    })
+  }
 
-  fileChecker(['public', 'about.pdf']).then(exist => {
-    if(!exist) {
-      axios.get('https://cloud-api.yandex.net/v1/disk/resources?path=disk%3A%2Fabout.pdf', 
-      {headers: yandexDiskHeaders})
-        .then(({data: {name, file}}) => {
-          axios.get(file, {headers: yandexDiskHeaders, responseType: 'arraybuffer'})
-            .then(({data}) => {
-              const res = Buffer.from(data, 'binary')
-              //writeFile([__dirname, '..', '..', 'public', name], res)
-              writeFileSync(resolve(__dirname, '..', '..', 'public', name), res, 'binary')
-            })
-        })
-    }
-  })
+  
 
   axios.get('https://cloud-api.yandex.net/v1/disk/resources?path=disk%3A%2Flogistic-management',
     {headers: yandexDiskHeaders})

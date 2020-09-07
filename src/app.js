@@ -11,8 +11,8 @@ import indexRouter from './routes/index';
 
 dotenv.config();
 
-var app = express();
-app
+
+export default express()
   .use(cors())
   .use(logger('dev'))
   .use(express.json())
@@ -21,4 +21,3 @@ app
   .use('/', indexRouter)
   .use('/public', express.static(path.resolve(__dirname, '..', 'public')))
 
-export default app;
